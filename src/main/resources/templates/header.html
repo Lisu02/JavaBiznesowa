@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Header</title>
+</head>
+<body>
+<header th:fragment="header" class="container-fluid d-flex justify-content-center">
+  <h1 class="p-3">Ogłoszenia</h1>
+</header>
+
+<nav th:fragment="navbar" class="bg-primary" data-bs-theme="dark">
+  <div class="container-fluid d-flex justify-content-between">
+    <div class="d-flex">
+      <a class="p-3 text-light text-decoration-none fw-bold" th:href="@{/}">Strona główna</a>
+      <a  class="p-3 text-light text-decoration-none fw-bold" th:href="@{/}">Moje Ogłoszenia</a>
+      <a  class="p-3 text-light text-decoration-none fw-bold" th:href="@{/add}">Dodaj ogłoszenie</a>
+      <a class="p-3 text-light text-decoration-none fw-bold" th:href="@{/}">Dodaj kategorię</a>
+    </div>
+    <div class="d-flex">
+      <p class="p-3 text-light text-decoration-none fw-bold">User: <span sec:authentication="principal.username"></span></p>
+      <p class="p-3 text-light text-decoration-none fw-bold">Role: <span sec:authentication="principal.authorities"></span></p>
+      <a  class="p-3 text-light text-decoration-none fw-bold" th:href="@{/logout}">Wyloguj</a>
+    </div>
+  </div>
+</nav>
+</body>
+</html>
