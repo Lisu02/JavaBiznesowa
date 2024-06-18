@@ -23,9 +23,7 @@ public class MainPageController {
         List<Advert> advertList = advertDAO.findAll();
         model.addAttribute("adverts",advertList);
         //User??
-        for(Advert tmpAdvert: advertList){
-            System.out.println(tmpAdvert.getInformation());
-        }
+
         return "main-page";
     }
 
@@ -39,7 +37,6 @@ public class MainPageController {
 
     @PostMapping("/processAdvertForm")
     public String processAdvertForm(@ModelAttribute("advert") Advert advert){
-        System.out.println(advert.getId() + " | " + advert.getInformation());
         advertDAO.save(advert);
         return "redirect:/";
     }
