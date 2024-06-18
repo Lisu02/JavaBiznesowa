@@ -29,7 +29,7 @@ public class AdvertDAOImpl implements AdvertDAO{
     }
 
     @Override
-    public Advert findById(Integer id) {
+    public Advert findById(Long id) {
         return entityManager.find(Advert.class,id);
     }
 

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name ="advert")
 @Setter
@@ -17,10 +19,19 @@ public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Long id;
+
+    @Column(name="title")
+    private String title;
 
     @Column(name="information")
     private String information;
 
+    @Column(name="creation_date")
+    private LocalDate creationDate;
 
+    @Column(name="expiration_date")
+    private LocalDate expirationDate;
+    @Column(name="accepted")
+    private Boolean accepted;
 }

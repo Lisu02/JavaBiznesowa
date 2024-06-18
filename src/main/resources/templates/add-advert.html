@@ -7,7 +7,7 @@
 <body>
 <h2>Add a new advert!</h2>
 
-<form th:action="@{/processAdvertForm}" th:object="${advert}" method="POST">
+<form th:action="@{/add}" th:object="${advert}" method="POST">
 
     Advert Information: <input type="text" th:field="${advert.information}" />
 
