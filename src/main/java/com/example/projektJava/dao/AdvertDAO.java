@@ -8,7 +8,7 @@ public interface AdvertDAO {
 
     void save(Advert theAdvert);
 
-    Advert findById(Integer id);
+    Advert findById(Long id);
 
     List<Advert> findAll();
 
