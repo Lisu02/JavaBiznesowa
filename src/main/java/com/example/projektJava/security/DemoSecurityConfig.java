@@ -13,12 +13,14 @@ import javax.sql.DataSource;
 public class DemoSecurityConfig {
 
 
+    //POBRANIE UŻYTKOWNIKÓW Z BAZY DANYCH
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
         return  new JdbcUserDetailsManager(dataSource);
     }
 
 
+    //USTAWIENIE DOTYCZĄCE DOSTĘPU RÓL DO STRON ORAZ WŁASNE ERROR PAGE
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
