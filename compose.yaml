@@ -9,3 +9,9 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_USER: postgres
       POSTGRES_DB: BiznesProjekt
+  adminer:
+    image: adminer
+    container_name: biznesowy-adminer
+    restart: always
+    ports:
+      - "2080:8080"
