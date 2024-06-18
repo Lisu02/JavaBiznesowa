@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main-Page</title>
+</head>
+<body>
+<h1>Welcome to our main page</h1>
+<br><br>
+    <h2>List of Adverts</h2>
+<ul>
+    <li th:each="advert : ${adverts}">
+        <span th:text="${advert.id}">Advert ID</span>: <span th:text="${advert.information}">Informacja</span>
+    </li>
+</ul>
+
+</body>
+</html>

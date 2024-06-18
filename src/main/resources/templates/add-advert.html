@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding new advert page</title>
+</head>
+<body>
+<h2>Add a new advert!</h2>
+
+<form th:action="@{/processAdvertForm}" th:object="${advert}" method="POST">
+
+    Advert Information: <input type="text" th:field="${advert.information}" />
+
+    <br><br>
+
+    <input type="submit" value="Submit" />
+
+</form>
+</body>
+</html>
