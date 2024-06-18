@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class    AdvertDAOImpl implements AdvertDAO{
+public class AdvertDAOImpl implements AdvertDAO{
 
 
     private EntityManager entityManager;
