@@ -33,6 +33,7 @@ public class AdvertDAOImpl implements AdvertDAO{
         return entityManager.find(Advert.class,id);
     }
 
+
     @Override
     public List<Advert> findAll() {
         TypedQuery<Advert> theQuery = entityManager.createQuery("FROM Advert ", Advert.class);

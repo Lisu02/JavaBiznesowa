@@ -62,6 +62,8 @@ public class AdvertController {
 
     @PostMapping("/update/{id}")
     public String updateAdvertForm(@ModelAttribute("advert") Advert advert){
+        Advert advertTMP = advertDAO.findById(advert.getId());
+        advert.setCreationDate(advertTMP.getCreationDate());
         advertDAO.update(advert);
         return "redirect:/";
     }

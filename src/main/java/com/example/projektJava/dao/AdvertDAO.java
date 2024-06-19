@@ -10,6 +10,7 @@ public interface AdvertDAO {
 
     Advert findById(Long id);
 
+
     List<Advert> findAll();
 
     void update(Advert theAdvert);
