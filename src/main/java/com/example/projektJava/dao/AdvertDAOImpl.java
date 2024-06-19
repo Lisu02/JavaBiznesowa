@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,7 +39,38 @@ public class AdvertDAOImpl implements AdvertDAO{
 
     @Override
     public List<Advert> findAll() {
-        TypedQuery<Advert> theQuery = entityManager.createQuery("FROM Advert ", Advert.class);
+        TypedQuery<Advert> theQuery = entityManager.createQuery("FROM Advert", Advert.class);
+
+        return theQuery.getResultList();
+    }
+
+    public List<Advert> findByAccepted(Boolean accepted) {
+        TypedQuery<Advert> theQuery = entityManager.createQuery("FROM Advert WHERE accepted = :accepted", Advert.class);
+        theQuery.setParameter("accepted", accepted);
+
+        return theQuery.getResultList();
+    }
+    @Override
+    public List<Advert> findByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = null;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                username = ((UserDetails) principal).getUsername();
+            } else {
+                username = principal.toString();
+            }
+        }
+
+        if (username == null || username.isEmpty()) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+
+        TypedQuery<Advert> theQuery = entityManager.createQuery(
+                "SELECT a FROM Advert a WHERE a.user.username = :username", Advert.class);
+        theQuery.setParameter("username", username);
 
         return theQuery.getResultList();
     }

@@ -5,17 +5,17 @@ import com.example.projektJava.dao.UsersDAO;
 import com.example.projektJava.model.Advert;
 import com.example.projektJava.model.Users;
 import com.example.projektJava.service.EmailService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -38,12 +38,28 @@ public class AdvertController {
 
     @GetMapping("/")
     public String getMainPage(Model model){
-        List<Advert> advertList = advertDAO.findAll();
+        List<Advert> advertList = advertDAO.findByAccepted(true);
         model.addAttribute("adverts",advertList);
         emailService.testowySerwisLogowanie();
         //User??
 
         return "main-page";
+    }
+
+    @GetMapping("/user-adverts")
+    public String getUserAdverts(Model model){
+        List<Advert> advertList = advertDAO.findByUser();
+        model.addAttribute("adverts",advertList);
+
+        return "user-advert-page";
+    }
+
+    @GetMapping("/waiting-adverts")
+    public String getWaitingAdverts(Model model){
+        List<Advert> advertList = advertDAO.findByAccepted(false);
+        model.addAttribute("adverts",advertList);
+
+        return "moderate-advert";
     }
 
     @GetMapping("/add")
@@ -88,8 +104,19 @@ public class AdvertController {
     public String updateAdvertForm(@ModelAttribute("advert") Advert advert){
         Advert advertTMP = advertDAO.findById(advert.getId());
         advert.setCreationDate(advertTMP.getCreationDate());
+        advert.setAccepted(false);
+
         advertDAO.update(advert);
         return "redirect:/";
+    }
+
+    @PostMapping("/accept/{id}")
+    public String acceptAdvert(@PathVariable Long id){
+        Advert advert = advertDAO.findById(id);
+        advert.setAccepted(true);
+
+        advertDAO.update(advert);
+        return "redirect:/waiting-adverts";
     }
 
     @PostMapping("/delete/{id}")

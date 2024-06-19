@@ -13,6 +13,10 @@ public interface AdvertDAO {
 
     List<Advert> findAll();
 
+    List<Advert> findByUser();
+
+    List<Advert> findByAccepted(Boolean accepted);
+
     void update(Advert theAdvert);
 
     void delete(Advert theAdvert);
