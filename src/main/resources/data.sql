@@ -3,7 +3,7 @@
 
 
 -- Inserting users data
-TRUNCATE TABLE users,authorities,advert;
+TRUNCATE TABLE users,authorities,advert,category;
 -- usuwac zawartosc tabel wazne!!!!
 
 INSERT INTO users (username, enabled, password) VALUES
@@ -16,6 +16,11 @@ INSERT INTO authorities (authority, username) VALUES
 ('ROLE_EMPLOYEE', 'user'),
 ('ROLE_EMPLOYEE', 'user2'),
 ('ROLE_ADMIN', 'admin');
+
+INSERT INTO category (name) VALUES
+('sprzedaż'),
+('praca'),
+('poszukiwanie');
 
 
 INSERT INTO advert (title, information, accepted, username, creation_date, expiration_date)

@@ -16,8 +16,8 @@
       <a  class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('EMPLOYEE')" th:href="@{/user-adverts}">Moje Ogłoszenia</a>
       <a  class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('EMPLOYEE')" th:href="@{/add}">Dodaj ogłoszenie</a>
       <a  class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('ADMIN')" th:href="@{/waiting-adverts}">Moderowanie Ogłoszeń</a>
-      <a  class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('ADMIN')" th:href="@{/}">Kategorie</a>
-      <a class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('ADMIN')" th:href="@{/}">Dodaj kategorię</a>
+      <a  class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('ADMIN')" th:href="@{/category}">Kategorie</a>
+      <a class="p-3 text-light text-decoration-none fw-bold" sec:authorize="hasRole('ADMIN')" th:href="@{/category/add}">Dodaj kategorię</a>
     </div>
     <div class="d-flex">
       <p class="p-3 text-light text-decoration-none fw-bold">User: <span sec:authentication="principal.username"></span></p>

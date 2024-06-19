@@ -55,7 +55,7 @@ public class AdvertController {
         List<Advert> advertList = advertDAO.findByUser();
         model.addAttribute("adverts",advertList);
 
-        return "user-advert-page";
+        return "advert/user-advert-page";
     }
 
     @GetMapping("/waiting-adverts")
@@ -63,14 +63,16 @@ public class AdvertController {
         List<Advert> advertList = advertDAO.findByAccepted(false);
         model.addAttribute("adverts",advertList);
 
-        return "moderate-advert";
+        return "advert/moderate-advert";
     }
 
     @GetMapping("/add")
     public String addAdvert(Model model){
 
         model.addAttribute("advert",new Advert());
-        return "add-advert";
+
+
+        return "advert/add-advert";
     }
 
     @PostMapping("/add")
@@ -85,13 +87,20 @@ public class AdvertController {
     public String updateAdvert(Model model, @PathVariable Long id){
 
         model.addAttribute("advert",advertDAO.findById(id));
-        return "edit-advert";
+
+        return "advert/edit-advert";
+
     }
 
     @PostMapping("/update/{id}")
     public String updateAdvertForm(@ModelAttribute("advert") Advert advert){
+        Advert advertTMP = advertDAO.findById(advert.getId());
+        advert.setCreationDate(advertTMP.getCreationDate());
+        advert.setUser(advertTMP.getUser());
+        advert.setAccepted(false);
 
-        advertService.updateAdvertForm(advert);
+
+        //advertService.updateAdvertForm(advert);
         return "redirect:/";
     }
 
