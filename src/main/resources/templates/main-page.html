@@ -41,12 +41,12 @@
             <p>Data utworzenia: <span class="date" th:text="${advert.creationDate}">01-01-2024</span></p>
             <p>Data wygaśnięcia: <span class="date" th:text="${advert.expirationDate}">31-12-2024</span></p>
         </div>
-        <div class="announcement-footer">
-            <form th:action="@{'/delete/' + ${advert.id}}" method="POST">
-                <button type="submit" class="delete-button">Usuń</button>
-            </form>
+        <div class="announcement-footer" sec:authorize="hasRole('ADMIN')">
             <form th:action="@{'/update/' + ${advert.id}}" method="GET">
                 <button type="submit" class="edit-button">Edytuj</button>
+            </form>
+            <form th:action="@{'/delete/' + ${advert.id}}" method="POST">
+                <button type="submit" class="delete-button">Usuń</button>
             </form>
         </div>
     </div>

@@ -38,7 +38,7 @@ public class AdvertController {
 
     @GetMapping("/")
     public String getMainPage(Model model){
-        List<Advert> advertList = advertDAO.findAll();
+        List<Advert> advertList = advertDAO.findByAccepted(true);
         model.addAttribute("adverts",advertList);
         //User??
 
@@ -51,6 +51,14 @@ public class AdvertController {
         model.addAttribute("adverts",advertList);
 
         return "user-advert-page";
+    }
+
+    @GetMapping("/waiting-adverts")
+    public String getWaitingAdverts(Model model){
+        List<Advert> advertList = advertDAO.findByAccepted(false);
+        model.addAttribute("adverts",advertList);
+
+        return "moderate-advert";
     }
 
     @GetMapping("/add")
@@ -99,6 +107,15 @@ public class AdvertController {
 
         advertDAO.update(advert);
         return "redirect:/";
+    }
+
+    @PostMapping("/accept/{id}")
+    public String acceptAdvert(@PathVariable Long id){
+        Advert advert = advertDAO.findById(id);
+        advert.setAccepted(true);
+
+        advertDAO.update(advert);
+        return "redirect:/waiting-adverts";
     }
 
     @PostMapping("/delete/{id}")

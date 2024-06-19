@@ -15,7 +15,6 @@ INSERT INTO users (username, enabled, password) VALUES
 INSERT INTO authorities (authority, username) VALUES
 ('ROLE_EMPLOYEE', 'user'),
 ('ROLE_EMPLOYEE', 'user2'),
-('ROLE_EMPLOYEE', 'admin'),
 ('ROLE_ADMIN', 'admin');
 
 
@@ -53,5 +52,5 @@ VALUES
      'Sprzedam samochód osobowy marki Toyota, model Corolla, rocznik 2015. Przebieg: 75,000 km. Auto jest w bardzo dobrym stanie technicznym i wizualnym, regularnie serwisowane, garażowane. Wyposażenie: klimatyzacja, system nawigacji, tempomat, czujniki parkowania. Cena: 35,000 zł. Możliwość jazdy próbnej po wcześniejszym umówieniu. Kontakt: 555-666-777.',
      false,
      'user',
-     '2024-04-05',
-     '2024-04-05');
+     '2024-07-05',
+     '2024-08-05');
