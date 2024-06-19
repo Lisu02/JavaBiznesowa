@@ -45,6 +45,14 @@ public class AdvertController {
         return "main-page";
     }
 
+    @GetMapping("/user-adverts")
+    public String getUserAdverts(Model model){
+        List<Advert> advertList = advertDAO.findByUser();
+        model.addAttribute("adverts",advertList);
+
+        return "user-advert-page";
+    }
+
     @GetMapping("/add")
     public String addAdvert(Model model){
 

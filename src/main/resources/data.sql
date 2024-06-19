@@ -8,11 +8,13 @@ TRUNCATE TABLE users,authorities,advert;
 
 INSERT INTO users (username, enabled, password) VALUES
 ('user', true, '{noop}test123'),
+('user2', true, '{noop}test123'),
 ('admin', true, '{noop}test123');
 
 
 INSERT INTO authorities (authority, username) VALUES
 ('ROLE_EMPLOYEE', 'user'),
+('ROLE_EMPLOYEE', 'user2'),
 ('ROLE_EMPLOYEE', 'admin'),
 ('ROLE_ADMIN', 'admin');
 
@@ -22,14 +24,14 @@ VALUES
     ('Sprzedam Rower Górski',
      'Sprzedam rower górski marki Giant, model XTR. Rower jest w bardzo dobrym stanie, mało używany, regularnie serwisowany w autoryzowanym serwisie. Wyposażony w 21 biegów, amortyzatory oraz nowe opony. Idealny na wyprawy w trudnym terenie. Cena: 800 zł. Możliwość obejrzenia w weekendy po wcześniejszym umówieniu. Kontakt: 123-456-789.',
      true,
-     'user',
+     'user2',
      '2024-07-04',
      '2024-08-04'),
 
     ('Mieszkanie do Wynajęcia',
      'Do wynajęcia dwupokojowe mieszkanie w centrum miasta, ul. Krakowska 12. Mieszkanie jest w pełni umeblowane, świeżo po remoncie. Składa się z przestronnego salonu, sypialni, kuchni oraz łazienki. Blisko przystanki komunikacji miejskiej, sklepy, restauracje oraz park. Cena: 2000 zł/miesiąc, plus media. Preferowany najem długoterminowy. Kontakt: mieszkanie@domena.pl.',
      true,
-     'user',
+     'user2',
      '2024-07-05',
      '2024-08-05'),
 
