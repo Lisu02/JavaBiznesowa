@@ -34,4 +34,8 @@ public class Advert {
     private LocalDate expirationDate;
     @Column(name="accepted")
     private Boolean accepted;
+
+    @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private Users user;
 }

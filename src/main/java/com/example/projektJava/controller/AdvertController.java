@@ -1,14 +1,21 @@
 package com.example.projektJava.controller;
 
 import com.example.projektJava.dao.AdvertDAO;
+import com.example.projektJava.dao.UsersDAO;
 import com.example.projektJava.model.Advert;
+import com.example.projektJava.model.Users;
 import com.example.projektJava.service.EmailService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -18,12 +25,14 @@ public class AdvertController {
 
 
     private AdvertDAO advertDAO;
+    private UsersDAO usersDAO;
     private EmailService emailService;
 
     @Autowired
-    public AdvertController(AdvertDAO advertDao, EmailService emailService){
+    public AdvertController(AdvertDAO advertDao, EmailService emailService, UsersDAO usersDAO){
         this.advertDAO = advertDao;
         this.emailService = emailService;
+        this.usersDAO = usersDAO;
     }
 
 
@@ -46,9 +55,23 @@ public class AdvertController {
 
     @PostMapping("/add")
     public String processAdvertForm(@ModelAttribute("advert") Advert advert){
+        //Pobiernie użytkownika i listy jego ogłoszeń
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentName = authentication.getName();
+        Users user = usersDAO.findByUsername(currentName);
+        List<Advert> advertList = user.getAdverts();
+        //    if (advertList == null){advertList = new LinkedList<Advert>();}
         advert.setAccepted(false);
         advert.setCreationDate(LocalDate.now());
+        advert.setUser(user);
+        advertList.add(advert);
+        user.setAdverts(advertList);
         advertDAO.save(advert);
+        //usersDAO.update(user);
+
+
+
+        //WYSYŁANIE EMAILI
         //emailService.sendEmail("uzytkownik@gmail.com",advert.getTitle(),advert.getInformation());
         return "redirect:/";
     }

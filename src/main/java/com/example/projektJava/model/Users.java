@@ -29,4 +29,8 @@ public class Users {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Authorities> authorities;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Advert> adverts;
+
 }
