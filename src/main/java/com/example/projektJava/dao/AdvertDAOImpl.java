@@ -43,7 +43,7 @@ public class AdvertDAOImpl implements AdvertDAO{
 
         return theQuery.getResultList();
     }
-
+    @Override
     public List<Advert> findByAccepted(Boolean accepted) {
         TypedQuery<Advert> theQuery = entityManager.createQuery("FROM Advert WHERE accepted = :accepted", Advert.class);
         theQuery.setParameter("accepted", accepted);

@@ -15,43 +15,27 @@
 <br>
 <br>
 
-<h1>Dodaj ogłoszenie</h1>
+<h1>Edytuj kategorie</h1>
 <br>
 <fieldset th:fragment="task-form" class="card container w-25 mt-3">
-    <form method="POST" th:action="@{/add}" th:object="${advert}">
+    <form method="POST" th:action="@{'/category/update/' + ${category.id}}" th:object="${category}">
         <div class="card-body g-3 align-items-center">
             <div class="col mb-3">
                 <div class="col-sm-3">
-                    <label for="title" class="col-form-label">Tytuł</label>
+                    <label for="name" class="col-form-label">Nazwa</label>
                 </div>
                 <div class="col-sm-9">
-                    <input type="text" id="title" name="title" class="form-control" required>
-                </div>
-            </div>
-            <div class="col mb-3">
-                <div class="col-sm-3">
-                    <label for="information" class="col-form-label">Treść</label>
-                </div>
-                <div class="col-sm-12">
-                    <textarea id="information" name="information" class="form-control" required rows="5"></textarea>
-                </div>
-            </div>
-            <div class="col mb-3">
-                <div>
-                    <label for="expirationDate" class="col-form-label">Data wygaśnięcia</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="date" id="expirationDate" name="expirationDate" class="form-control" required>
+                    <input type="text" id="name" name="name" class="form-control" th:value="${category.name}" required>
                 </div>
             </div>
             <div>
-                <input class="form-control" type="submit" value="Dodaj"/>
+                <input class="form-control" type="submit" value="Zapisz"/>
             </div>
         </div>
     </form>
 </fieldset>
 <div class="button-container mx-auto">
-    <form th:action="@{/}" method="get">
+    <form th:action="@{/templates/category}" method="get">
         <button class="form-control">Anuluj</button>
     </form>
 </div>
