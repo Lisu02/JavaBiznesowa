@@ -77,8 +77,8 @@ public class AdvertDAOImpl implements AdvertDAO{
 
     @Override
     @Transactional
-    public void update(Advert theAdvert) {
-        entityManager.merge(theAdvert);
+    public Advert update(Advert theAdvert) {
+        return entityManager.merge(theAdvert);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.example.projektJava.aspect;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -26,6 +23,9 @@ public class LoggingAspect {
     public void logBefore() {
         logger.info("A method is about to be executed.");
     }
+
+//    @Around()
+//    public void logInside(){logger.info();}
 
     @AfterReturning(pointcut = "applicationPackagePointcut()", returning = "result")
     public void logAfterReturning(Object result) {

@@ -4,9 +4,11 @@ import com.example.projektJava.dao.AdvertDAO;
 import com.example.projektJava.dao.UsersDAO;
 import com.example.projektJava.model.Advert;
 import com.example.projektJava.model.Users;
+import com.example.projektJava.service.AdvertService;
 import com.example.projektJava.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +29,14 @@ public class AdvertController {
     private AdvertDAO advertDAO;
     private UsersDAO usersDAO;
     private EmailService emailService;
+    private AdvertService advertService;
 
     @Autowired
-    public AdvertController(AdvertDAO advertDao, EmailService emailService, UsersDAO usersDAO){
+    public AdvertController(AdvertDAO advertDao, EmailService emailService, UsersDAO usersDAO,AdvertService advertService){
         this.advertDAO = advertDao;
         this.emailService = emailService;
         this.usersDAO = usersDAO;
+        this.advertService = advertService;
     }
 
 
@@ -40,7 +44,7 @@ public class AdvertController {
     public String getMainPage(Model model){
         List<Advert> advertList = advertDAO.findByAccepted(true);
         model.addAttribute("adverts",advertList);
-        emailService.testowySerwisLogowanie();
+        //emailService.testowySerwisLogowanie();
         //User??
 
         return "main-page";
@@ -67,6 +71,7 @@ public class AdvertController {
 
         model.addAttribute("advert",new Advert());
 
+
         return "advert/add-advert";
     }
 
@@ -74,22 +79,8 @@ public class AdvertController {
     public String processAdvertForm(@ModelAttribute("advert") Advert advert){
         //Pobiernie użytkownika i listy jego ogłoszeń
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentName = authentication.getName();
-        Users user = usersDAO.findByUsername(currentName);
-        List<Advert> advertList = user.getAdverts();
-        //    if (advertList == null){advertList = new LinkedList<Advert>();}
-        advert.setAccepted(false);
-        advert.setCreationDate(LocalDate.now());
-        advert.setUser(user);
-        advertList.add(advert);
-        user.setAdverts(advertList);
-        advertDAO.save(advert);
-        //usersDAO.update(user);
-        emailService.testowySerwisLogowanie();
 
-
-        //WYSYŁANIE EMAILI
-        //emailService.sendEmail("uzytkownik@gmail.com",advert.getTitle(),advert.getInformation());
+        advertService.processAdvertForm(advert,authentication);
         return "redirect:/";
     }
     @GetMapping("/update/{id}")
@@ -98,6 +89,7 @@ public class AdvertController {
         model.addAttribute("advert",advertDAO.findById(id));
 
         return "advert/edit-advert";
+
     }
 
     @PostMapping("/update/{id}")
@@ -107,22 +99,23 @@ public class AdvertController {
         advert.setUser(advertTMP.getUser());
         advert.setAccepted(false);
 
-        advertDAO.update(advert);
+
+        //advertService.updateAdvertForm(advert);
         return "redirect:/";
     }
 
     @PostMapping("/accept/{id}")
     public String acceptAdvert(@PathVariable Long id){
-        Advert advert = advertDAO.findById(id);
-        advert.setAccepted(true);
 
-        advertDAO.update(advert);
+        advertService.acceptAdvert(id);
         return "redirect:/waiting-adverts";
     }
 
     @PostMapping("/delete/{id}")
+
     public String deleteAdvert(@PathVariable Long id){
-        advertDAO.delete(advertDAO.findById(id));
+
+        advertService.deleteAdvert(id);
         return "redirect:/";
     }
 
