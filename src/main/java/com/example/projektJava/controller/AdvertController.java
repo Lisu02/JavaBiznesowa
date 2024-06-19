@@ -49,7 +49,7 @@ public class AdvertController {
         advert.setAccepted(false);
         advert.setCreationDate(LocalDate.now());
         advertDAO.save(advert);
-        emailService.sendEmail("uzytkownik@gmail.com","tematTest",advert.getInformation());
+        //emailService.sendEmail("uzytkownik@gmail.com",advert.getTitle(),advert.getInformation());
         return "redirect:/";
     }
     @GetMapping("/update/{id}")
