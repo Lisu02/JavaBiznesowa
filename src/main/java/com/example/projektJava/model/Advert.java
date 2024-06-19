@@ -24,7 +24,7 @@ public class Advert {
     @Column(name="title")
     private String title;
 
-    @Column(name="information")
+    @Column(name="information", length = 500)
     private String information;
 
     @Column(name="creation_date")
