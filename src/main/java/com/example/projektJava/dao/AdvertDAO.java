@@ -17,7 +17,7 @@ public interface AdvertDAO {
 
     List<Advert> findByAccepted(Boolean accepted);
 
-    void update(Advert theAdvert);
+    Advert update(Advert theAdvert);
 
     void delete(Advert theAdvert);
 
