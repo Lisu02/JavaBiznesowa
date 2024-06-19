@@ -2,6 +2,7 @@ package com.example.projektJava.controller;
 
 import com.example.projektJava.dao.AdvertDAO;
 import com.example.projektJava.model.Advert;
+import com.example.projektJava.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,16 @@ import java.util.List;
 public class AdvertController {
 
 
-    @Autowired
+
     private AdvertDAO advertDAO;
+    private EmailService emailService;
+
+    @Autowired
+    public AdvertController(AdvertDAO advertDao, EmailService emailService){
+        this.advertDAO = advertDao;
+        this.emailService = emailService;
+    }
+
 
     @GetMapping("/")
     public String getMainPage(Model model){
@@ -40,6 +49,7 @@ public class AdvertController {
         advert.setAccepted(false);
         advert.setCreationDate(LocalDate.now());
         advertDAO.save(advert);
+        emailService.sendEmail("uzytkownik@gmail.com","tematTest",advert.getInformation());
         return "redirect:/";
     }
     @GetMapping("/update/{id}")
