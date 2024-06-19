@@ -12,3 +12,14 @@ CREATE TABLE IF NOT EXISTS authorities (
                              UNIQUE (username, authority),
                              CONSTRAINT authorities_fk_1 FOREIGN KEY (username) REFERENCES users (username)
 );
+
+CREATE TABLE IF NOT EXISTS advert   (
+                        id SERIAL PRIMARY KEY,
+                        title VARCHAR(255),
+                        information TEXT,
+                        creation_date DATE,
+                        expiration_date DATE,
+                        accepted BOOLEAN,
+                        username VARCHAR(255),
+                        CONSTRAINT fk_user FOREIGN KEY (username) REFERENCES users(username)
+);
