@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
                        username VARCHAR(50) NOT NULL,
                        password VARCHAR(50) NOT NULL,
-                       enabled SMALLINT NOT NULL,
+                       enabled BOOLEAN NOT NULL,
                        PRIMARY KEY (username)
 );
 

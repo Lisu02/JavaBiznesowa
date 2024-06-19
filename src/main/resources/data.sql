@@ -2,18 +2,12 @@
 -- DELETE FROM users WHERE username IN ('user', 'admin');
 
 
-INSERT INTO users (username, password, enabled)
-VALUES
-    ('user', '{noop}test123', 1),
-    ('admin', '{noop}test123', 1)
-ON CONFLICT DO NOTHING;
+-- Inserting users data
+INSERT INTO users (username, enabled, password) VALUES
+('user', true, '{noop}test123'),
+('admin', true, '{noop}test123');
 
-
-
-INSERT INTO authorities (username, authority)
-VALUES
-    ('user', 'ROLE_EMPLOYEE'),
-    ('admin', 'ROLE_EMPLOYEE'),
-    ('admin', 'ROLE_ADMIN')
-ON CONFLICT DO NOTHING;
-
+INSERT INTO authorities (authority, username) VALUES
+('ROLE_EMPLOYEE', 'user'),
+('ROLE_EMPLOYEE', 'admin'),
+('ROLE_ADMIN', 'admin');
