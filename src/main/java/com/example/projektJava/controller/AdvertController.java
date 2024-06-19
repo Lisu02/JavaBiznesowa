@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -36,7 +37,22 @@ public class AdvertController {
 
     @PostMapping("/add")
     public String processAdvertForm(@ModelAttribute("advert") Advert advert){
+        advert.setAccepted(false);
+        advert.setCreationDate(LocalDate.now());
         advertDAO.save(advert);
+        return "redirect:/";
+    }
+    @GetMapping("/update/{id}")
+    public String updateAdvert(Model model, @PathVariable Long id){
+
+        model.addAttribute("advert",advertDAO.findById(id));
+
+        return "edit-advert";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateAdvertForm(@ModelAttribute("advert") Advert advert){
+        advertDAO.update(advert);
         return "redirect:/";
     }
 

@@ -43,7 +43,7 @@
             <form th:action="@{'/delete/' + ${advert.id}}" method="POST">
                 <button type="submit" class="delete-button">Usuń</button>
             </form>
-            <form th:action="@{'/update/' + ${advert.id}}" method="POST">
+            <form th:action="@{'/update/' + ${advert.id}}" method="GET">
                 <button type="submit" class="edit-button">Edytuj</button>
             </form>
         </div>

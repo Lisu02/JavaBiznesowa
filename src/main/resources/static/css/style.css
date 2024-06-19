@@ -109,3 +109,7 @@ h1 {
     font-size: 0.85em;
     color: #777;
 }
+.button-container {
+    max-width: 25%;
+    margin-top: 1rem;
+}
