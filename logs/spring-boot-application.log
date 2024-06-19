@@ -1,0 +1,8 @@
+2024-06-19T22:51:50.317+02:00  INFO 31416 --- [projektJava] [http-nio-8080-exec-1] c.e.projektJava.aspect.LoggingAspect     : A method is about to be executed.
+2024-06-19T22:51:50.317+02:00  INFO 31416 --- [projektJava] [http-nio-8080-exec-1] c.e.projektJava.service.EmailService     : Testowy Log
+2024-06-19T22:51:50.317+02:00  INFO 31416 --- [projektJava] [http-nio-8080-exec-1] c.e.projektJava.aspect.LoggingAspect     : Metoda została wykonana i zwróciła: Wynik Testowej Metody
+2024-06-19T22:53:08.802+02:00  INFO 31416 --- [projektJava] [restartedMain] c.e.projektJava.ProjektJavaApplication   : Starting ProjektJavaApplication using Java 21.0.3 with PID 31416 (C:\Users\Karolina\Desktop\projektJava\target\classes started by Karolina in C:\Users\Karolina\Desktop\projektJava)
+2024-06-19T22:53:08.803+02:00  INFO 31416 --- [projektJava] [restartedMain] c.e.projektJava.ProjektJavaApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-06-19T22:53:09.800+02:00  WARN 31416 --- [projektJava] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-19T22:53:09.997+02:00  WARN 31416 --- [projektJava] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-19T22:53:10.354+02:00  INFO 31416 --- [projektJava] [restartedMain] c.e.projektJava.ProjektJavaApplication   : Started ProjektJavaApplication in 1.57 seconds (process running for 91.219)

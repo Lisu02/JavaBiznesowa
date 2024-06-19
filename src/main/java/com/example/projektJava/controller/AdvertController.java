@@ -40,6 +40,7 @@ public class AdvertController {
     public String getMainPage(Model model){
         List<Advert> advertList = advertDAO.findAll();
         model.addAttribute("adverts",advertList);
+        emailService.testowySerwisLogowanie();
         //User??
 
         return "main-page";
@@ -68,7 +69,7 @@ public class AdvertController {
         user.setAdverts(advertList);
         advertDAO.save(advert);
         //usersDAO.update(user);
-
+        emailService.testowySerwisLogowanie();
 
 
         //WYSYŁANIE EMAILI
