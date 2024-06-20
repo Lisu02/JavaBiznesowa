@@ -38,4 +38,8 @@ public class Advert {
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
     private Users user;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 }

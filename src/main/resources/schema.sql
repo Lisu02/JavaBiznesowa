@@ -7,10 +7,15 @@ CREATE TABLE IF NOT EXISTS users (
 
 
 CREATE TABLE IF NOT EXISTS authorities (
-                             username VARCHAR(50) NOT NULL,
-                             authority VARCHAR(50) NOT NULL,
-                             UNIQUE (username, authority),
-                             CONSTRAINT authorities_fk_1 FOREIGN KEY (username) REFERENCES users (username)
+                        username VARCHAR(50) NOT NULL,
+                        authority VARCHAR(50) NOT NULL,
+                        UNIQUE (username, authority),
+                        CONSTRAINT authorities_fk_1 FOREIGN KEY (username) REFERENCES users (username)
+);
+
+CREATE TABLE IF NOT EXISTS category   (
+                        id SERIAL PRIMARY KEY,
+                        name VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS advert   (
@@ -21,5 +26,7 @@ CREATE TABLE IF NOT EXISTS advert   (
                         expiration_date DATE,
                         accepted BOOLEAN,
                         username VARCHAR(255),
-                        CONSTRAINT fk_user FOREIGN KEY (username) REFERENCES users(username)
+                        category_id BIGINT,
+                        CONSTRAINT fk_user FOREIGN KEY (username) REFERENCES users(username),
+                        CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category(id)
 );
