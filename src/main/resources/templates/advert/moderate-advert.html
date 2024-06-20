@@ -25,6 +25,7 @@
             <span class="announcement-id" th:text="${advert.id}">1</span>
         </div>
         <div class="announcement-content">
+            <p th:text="${advert.category.name}"></p>
             <h3 th:text="${advert.title}">Tytuł ogłoszenia</h3>
             <p th:text="${advert.information}">Treść ogłoszenia</p>
         </div>
