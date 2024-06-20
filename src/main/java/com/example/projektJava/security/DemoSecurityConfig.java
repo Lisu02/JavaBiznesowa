@@ -27,6 +27,8 @@ public class DemoSecurityConfig {
                 configurer
                         .requestMatchers("/").hasAnyRole("EMPLOYEE","ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/category/**").hasRole("ADMIN")
+                        .requestMatchers("/waiting-adverts").hasRole("ADMIN")
                         .anyRequest().authenticated()
         ).formLogin(form ->
                 form
