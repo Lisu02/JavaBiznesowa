@@ -5,6 +5,8 @@ import com.example.projektJava.dao.UsersDAO;
 import com.example.projektJava.model.Advert;
 import com.example.projektJava.model.Users;
 import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
@@ -20,6 +22,9 @@ public class AdvertService {
     private AdvertDAO advertDAO;
     private UsersDAO usersDAO;
     private EmailService emailService;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     public AdvertService(AdvertDAO advertDAO,UsersDAO usersDAO,EmailService emailService){
         this.advertDAO = advertDAO;
@@ -45,8 +50,8 @@ public class AdvertService {
         user.setAdverts(userAdverts);
 
         advertDAO.save(advert);
-
-        //emailService.sendEmail("uzytkownik@gmail.com", advert.getTitle(), advert.getInformation() + "\n" + "Twoje ogloszenie oczekuje na zatwierdzenie");
+        logger.debug("New advert was successfully created by user: " + userName);
+        emailService.sendEmail("uzytkownik@gmail.com", advert.getTitle(), advert.getInformation() + "\n" + "Twoje ogloszenie oczekuje na zatwierdzenie");
     }
 
     public void updateAdvertForm(Advert advert){
@@ -54,7 +59,7 @@ public class AdvertService {
         advert.setCreationDate(advertTMP.getCreationDate());
         advert.setAccepted(false);
         advert.setUser(advertTMP.getUser());
-
+        logger.debug("Advert UPDATE \n" + "Old advert -> " + advertTMP + "\n" + "New advert -> " + advert);
         advertDAO.update(advert);
     }
 
@@ -62,9 +67,11 @@ public class AdvertService {
         Advert advert = advertDAO.findById(id);
         advert.setAccepted(true);
         advertDAO.update(advert);
+        logger.debug("Advert id{" + id + "} was accepted by admin");
     }
 
     public void deleteAdvert(Long id){
         advertDAO.delete(advertDAO.findById(id));
+        logger.debug("Advert id{" + id + "} was deleted");
     }
 }

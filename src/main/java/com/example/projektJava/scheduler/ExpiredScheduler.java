@@ -43,12 +43,13 @@ public class ExpiredScheduler {
                 advertDAO.delete(advert);
             }
         }
+        logger.debug("Checking for expired adverts");
 
     }
 
     public void sendExpirationEmail(Advert advert){
         logger.info("Deleting an expired advert -> " + advert);
-       // emailService.sendEmail("uzytkownik@gmail.com",advert.getTitle() + " EXPIRED","YOUR ADVERT HAS BEEN EXPIRED! (advert invormation below)\n" + advert.getInformation());
+        emailService.sendEmail("uzytkownik@gmail.com",advert.getTitle() + " EXPIRED","YOUR ADVERT HAS BEEN EXPIRED! (advert invormation below)\n" + advert.getInformation());
     }
 
 
