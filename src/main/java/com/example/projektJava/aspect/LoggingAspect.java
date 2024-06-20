@@ -21,11 +21,8 @@ public class LoggingAspect {
 
     @Before("applicationPackagePointcut()")
     public void logBefore() {
-       // logger.info("A method is about to be executed.");
+       // logger.info("Metoda zaraz zostanie wykonana.");
     }
-
-//    @Around()
-//    public void logInside(){logger.info();}
 
     @AfterReturning(pointcut = "applicationPackagePointcut()", returning = "result")
     public void logAfterReturning(Object result) {
